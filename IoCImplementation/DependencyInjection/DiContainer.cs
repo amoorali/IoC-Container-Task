@@ -18,7 +18,16 @@ namespace IoCImplementation.DependencyInjection
             var descriptor = _serviceDescriptors
                 .SingleOrDefault(d => d.ServiceType == typeof(T)) ?? throw new Exception($"Service of type {typeof(T).Name} isn't registered.");
             if (descriptor.Implementation != null) return (T)descriptor.Implementation;
-            return default;
+
+            var implementation = (T)Activator.CreateInstance(descriptor.ServiceType)!;
+
+            if (descriptor.Lifetime == ServiceLifetime.Singleton)
+            {
+                // If the service is a singleton, we store the instance in the descriptor
+                descriptor.Implementation = implementation;
+            }
+
+            return implementation;
         }
     }
 }
