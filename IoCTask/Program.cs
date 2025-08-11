@@ -1,18 +1,18 @@
+using IoCTask.Clients;
+using IoCTask.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<ClientsService>();
+builder.Services.AddScoped<IClient, ClientFirst>();
+builder.Services.AddScoped<IClient, ClientSecond>();
+builder.Services.AddScoped<IClient, ClientThird>();
+
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
 
 app.UseHttpsRedirection();
 
