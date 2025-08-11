@@ -1,0 +1,6 @@
+@IoCTask_HostAddress = http://localhost:5143
+
+GET {{IoCTask_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
