@@ -1,4 +1,5 @@
 ﻿
+
 namespace IoCImplementation.DependencyInjection
 {
     public class DiServiceCollection
@@ -10,19 +11,14 @@ namespace IoCImplementation.DependencyInjection
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(T), ServiceLifetime.Singleton));
         }
 
-        public void RegisterSingleton<TService>(TService implementation)
-        {
-            _serviceDescriptors.Add(new ServiceDescriptor(implementation!, ServiceLifetime.Singleton));
-        }
-
         public void RegisterTransient<T>()
         {
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(T), ServiceLifetime.Transient));
         }
 
-        public void RegisterTransient<TService>(TService implementation)
+        internal void RegisterTransient<TService, TImplementation>()
         {
-            _serviceDescriptors.Add(new ServiceDescriptor(implementation!, ServiceLifetime.Transient));
+            _serviceDescriptors.Add(new ServiceDescriptor(typeof(TService), typeof(TImplementation), ServiceLifetime.Transient));
         }
 
         public DiContainer GenerateContainer()

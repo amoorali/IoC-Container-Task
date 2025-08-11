@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace IoCImplementation.DependencyInjection
+﻿namespace IoCImplementation.DependencyInjection
 {
     public class DiContainer
     {
@@ -16,10 +14,13 @@ namespace IoCImplementation.DependencyInjection
         {
             // This method should return an instance of T from the container.
             var descriptor = _serviceDescriptors
-                .SingleOrDefault(d => d.ServiceType == typeof(T)) ?? throw new Exception($"Service of type {typeof(T).Name} isn't registered.");
+                .SingleOrDefault(d => d.ServiceType == typeof(T))
+                ?? throw new Exception($"Service of type {typeof(T).Name} isn't registered.");
+            
             if (descriptor.Implementation != null) return (T)descriptor.Implementation;
 
-            var implementation = (T)Activator.CreateInstance(descriptor.ServiceType)!;
+            var implementation = (T)Activator
+                .CreateInstance(descriptor.ImplementationType ?? descriptor.ServiceType)!;
 
             if (descriptor.Lifetime == ServiceLifetime.Singleton)
             {

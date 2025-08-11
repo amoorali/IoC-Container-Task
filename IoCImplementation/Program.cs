@@ -1,4 +1,5 @@
-﻿using IoCImplementation.DependencyInjection;
+﻿using IoCImplementation.Clients;
+using IoCImplementation.DependencyInjection;
 
 namespace IoCImplementation
 {
@@ -9,22 +10,14 @@ namespace IoCImplementation
             var services = new DiServiceCollection();
 
             //services.RegisterSingleton(new RandomNumberGenerator());
-            services.RegisterSingleton<RandomNumberGenerator>();
+            services.RegisterTransient<IClient, ClientFirst>();
 
             var container = services.GenerateContainer();
 
-            var ServiceFirst = container.GetService<RandomNumberGenerator>();
-            var ServiceSecond = container.GetService<RandomNumberGenerator>();
+            var ServiceFirst = container.GetService<IClient>();
+            var ServiceSecond = container.GetService<IClient>();
 
-            Console.WriteLine(ServiceFirst.RandNum == ServiceSecond.RandNum); // Should print True
-
-
-            var ServiceThird = container.GetService<RandomNumberGenerator>();
-            var ServiceFourth = container.GetService<RandomNumberGenerator>();
-
-
-
-            //var service = container.GetService<DiContainer>();
+            ServiceFirst.LogMessage("Nigga");
         }
     }
 }
