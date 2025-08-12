@@ -10,14 +10,20 @@ namespace IoCImplementation
             var services = new DiServiceCollection();
 
             //services.RegisterSingleton(new RandomNumberGenerator());
-            services.RegisterTransient<IClient, ClientFirst>();
+            services.RegisterSingleton<IClient, ClientFirst>();
+            services.RegisterTransient<ILogger, Logger>();
 
             var container = services.GenerateContainer();
 
-            var ServiceFirst = container.GetService<IClient>();
-            var ServiceSecond = container.GetService<IClient>();
+            var serviceFirst = container.GetService<IClient>();
+            var serviceSecond = container.GetService<IClient>();
 
-            ServiceFirst.LogMessage("Nigga");
+            serviceSecond.LogMessage($"Id: {serviceSecond.Id}, Name: {serviceSecond.Name}");
+
+            serviceFirst.Id = 50;
+            serviceFirst.Name = "Ali";
+
+            serviceSecond.LogMessage($"Id: {serviceSecond.Id}, Name: {serviceSecond.Name}");
         }
     }
 }

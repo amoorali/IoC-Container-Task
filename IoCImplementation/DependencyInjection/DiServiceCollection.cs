@@ -11,6 +11,11 @@ namespace IoCImplementation.DependencyInjection
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(T), ServiceLifetime.Singleton));
         }
 
+        public void RegisterSingleton<TService, TImplementation>()
+        {
+            _serviceDescriptors.Add(new ServiceDescriptor(typeof(TService), typeof(TImplementation), ServiceLifetime.Singleton));
+        }
+
         public void RegisterTransient<T>()
         {
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(T), ServiceLifetime.Transient));
