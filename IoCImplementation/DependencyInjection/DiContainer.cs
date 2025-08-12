@@ -28,6 +28,8 @@ namespace IoCImplementation.DependencyInjection
                 throw new InvalidOperationException($"Circular dependency detected for type {serviceType.Name}.");
             }
 
+            callStack.Add(serviceType);
+
             try
             {
                 var descriptor = _serviceDescriptors
