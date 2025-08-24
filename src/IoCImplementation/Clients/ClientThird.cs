@@ -8,7 +8,7 @@
         public void LogMessage(string message)
         {
             // Simulate logging
-            System.Console.WriteLine($"ClientThird: {message}");
+            Console.WriteLine($"ClientThird: {message}");
         }
     }
 }

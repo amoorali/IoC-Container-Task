@@ -1,5 +1,5 @@
-﻿using IoCImplementation.Clients;
-using IoCImplementation.DependencyInjection;
+﻿using IoCImplementation.DependencyInjection;
+using IoCImplementation.Clients;
 
 namespace IoCImplementation
 {
@@ -9,7 +9,6 @@ namespace IoCImplementation
         {
             var services = new DiServiceCollection();
 
-            //services.RegisterSingleton(new RandomNumberGenerator());
             services.RegisterSingleton<IClient, ClientFirst>();
             services.RegisterTransient<ILogger, Logger>();
 

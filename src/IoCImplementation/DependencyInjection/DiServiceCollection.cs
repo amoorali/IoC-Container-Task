@@ -1,6 +1,4 @@
-﻿
-
-namespace IoCImplementation.DependencyInjection
+﻿namespace IoCImplementation.DependencyInjection
 {
     public class DiServiceCollection
     {
@@ -21,7 +19,7 @@ namespace IoCImplementation.DependencyInjection
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(T), ServiceLifetime.Transient));
         }
 
-        internal void RegisterTransient<TService, TImplementation>()
+        public void RegisterTransient<TService, TImplementation>()
         {
             _serviceDescriptors.Add(new ServiceDescriptor(typeof(TService), typeof(TImplementation), ServiceLifetime.Transient));
         }
@@ -32,3 +30,4 @@ namespace IoCImplementation.DependencyInjection
         }
     }
 }
+
