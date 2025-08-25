@@ -5,9 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<ClientsService>();
-builder.Services.AddScoped<IClient, ClientFirst>();
-builder.Services.AddScoped<IClient, ClientSecond>();
-builder.Services.AddScoped<IClient, ClientThird>();
+builder.Services.AddTransient<IClient, ClientFirst>();
+builder.Services.AddTransient<IClient, ClientSecond>();
+builder.Services.AddTransient<IClient, ClientThird>();
 
 
 builder.Services.AddControllers();

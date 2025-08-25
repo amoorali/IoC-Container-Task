@@ -41,12 +41,6 @@ namespace IoCImplementation.DependencyInjection
                     throw new Exception($"Service of type {serviceType} isn't registered.");
                 }
 
-                if (descriptor.Implementation != null)
-                {
-                    // If the service is already instantiated, return it
-                    return descriptor.Implementation;
-                }
-
                 if (descriptor.Lifetime == ServiceLifetime.Singleton)
                 {
                     if (descriptor.Implementation != null)
@@ -72,8 +66,6 @@ namespace IoCImplementation.DependencyInjection
 
         private object CreateInstanceFor(ServiceDescriptor descriptor, HashSet<Type> callStack)
         {
-            if (descriptor.Implementation != null) return descriptor.Implementation;
-
             var implementationType = descriptor.ImplementationType
                                      ?? descriptor.ServiceType
                                      ?? throw new Exception($"No implemenatation provided for {descriptor.ServiceType}");
